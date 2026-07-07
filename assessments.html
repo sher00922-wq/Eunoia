@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assessments — Eunoia Praxis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #181d26;
+    --body: #181d26;
+    --muted: #5f6b5a;
+    --line: #e8ece4;
+    --canvas: #ffffff;
+    --surface: #f8faf6;
+    --surface-2: #eef3e8;
+    --forest: #243126;
+    --forest-2: #314235;
+    --cream: #f4efe7;
+    --stone: #ece7df;
+    --green: #7b9461;
+    --green-soft: #a8ba92;
+    --green-pale: #c5d1a8;
+    --green-deep: #4a6a2a;
+    --green-mist: rgba(123,148,97,0.06);
+    --radius-sm: 14px;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --shadow-1: 0 1px 2px rgba(24,29,38,0.04);
+    --shadow-2: 0 4px 16px rgba(24,29,38,0.05);
+    --shadow-3: 0 12px 40px rgba(24,29,38,0.08);
+    --shadow-glow: 0 0 40px rgba(95,127,58,0.12);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--body);
+    background: var(--canvas);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--green-pale); color: var(--ink); }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px;
+  }
+
+  .ep-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 12px 24px;
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    background: rgba(255,255,255,0.92);
+    border-bottom: 1px solid rgba(214,220,208,0.4);
+    transition: all 0.4s var(--ease-out);
+  }
+
+  .ep-nav-inner {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .ep-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .ep-logo img { width: 44px; height: 44px; object-fit: contain; }
+  .ep-logo-title { font-family: var(--font-serif); font-size: 16px; font-weight: 400; font-style: italic; color: var(--ink); }
+
+  .ep-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .ep-nav-links a {
+    position: relative;
+    text-decoration: none;
+    color: #3a3f36;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    transition: color 0.3s ease;
+    padding: 4px 0;
+  }
+  .ep-nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 1.5px;
+    background: var(--green);
+    border-radius: 1px;
+    transition: width 0.35s var(--ease-out);
+  }
+  .ep-nav-links a:hover::after { width: 100%; }
+
+  .ep-nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #181d26;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.3s var(--ease-out);
+    border: none;
+  }
+  .ep-nav-button:hover { background: var(--green); color: var(--ink); }
+
+  .ep-mobile-btn { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 10000; }
+  .ep-mobile-btn span { width: 22px; height: 2px; background: var(--ink); display: block; transition: all 0.3s ease; border-radius: 1px; }
+  .ep-mobile-btn.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+  .ep-mobile-btn.active span:nth-child(2) { opacity: 0; }
+  .ep-mobile-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+  .ep-mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(30px); z-index: 9990; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .ep-mobile-menu.active { opacity: 1; pointer-events: all; }
+  .ep-mobile-menu a { font-family: var(--font-serif); font-size: 20px; color: var(--ink); text-decoration: none; }
+
+  .assessment-hero {
+    position: relative;
+    padding: 130px 32px 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1.5px;
+    background: var(--green);
+    border-radius: 1px;
+  }
+
+  .hero-inner h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .hero-inner p {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .editorial-intro {
+    background: var(--canvas);
+    padding: 80px 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .editorial-title {
+    font-family: var(--font-serif);
+    font-size: clamp(23px, 2.6vw, 31px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .editorial-copy p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .feature-section {
+    padding: 40px 32px 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .feature-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .feature-primary {
+    background: var(--forest);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s var(--ease-out);
+    box-shadow: var(--shadow-2);
+  }
+  .feature-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-soft), var(--green-pale));
+    opacity: 0.6;
+  }
+  .feature-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3);
+  }
+
+  .feature-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--green-soft);
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+
+  .feature-primary h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 2.4vw, 29px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .feature-primary > div > p {
+    max-width: 480px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .feature-list {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .feature-item {
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.3s ease;
+  }
+  .feature-item:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+
+  .feature-item h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+  }
+  .feature-item p {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .feature-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .side-card {
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.5s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+  }
+  .side-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-soft), var(--green-pale));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .side-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3);
+    border-color: rgba(168,186,146,0.2);
+  }
+  .side-card:hover::before { opacity: 1; }
+
+  .side-card.light {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .side-card.cream {
+    background: var(--cream);
+  }
+
+  .side-card h3 {
+    font-family: var(--font-serif);
+    font-size: clamp(18px, 1.7vw, 22px);
+    line-height: 1.15;
+    letter-spacing: -0.8px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .side-card p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .service-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .strip-card {
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    transition: all 0.5s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+  .strip-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-soft), var(--green-pale));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .strip-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-3);
+    border-color: rgba(168,186,146,0.3);
+    background: var(--surface);
+  }
+  .strip-card:hover::before { opacity: 1; }
+
+  .strip-card h4 {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .strip-card p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .cta-band {
+    padding: 100px 32px;
+    text-align: center;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(95,127,58,0.18) 0%, transparent 60%);
+    pointer-events: none;
+    animation: ctaOrb 10s ease-in-out infinite;
+  }
+  @keyframes ctaOrb {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.15); }
+  }
+  .cta-inner {
+    max-width: 700px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    color: var(--green-soft);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .cta-inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(23px, 2.8vw, 33px);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .cta-inner p {
+    max-width: 560px;
+    margin: 0 auto 32px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+  }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    background: white;
+    color: #181d26;
+    font-size: 13px;
+    font-weight: 500;
+    transition: transform 0.25s ease;
+    border: none;
+  }
+  .cta-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .footer {
+    background: var(--canvas);
+    border-top: 1px solid var(--line);
+    padding: 72px 32px;
+  }
+  .footer-container {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-brand h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .footer-brand p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 420px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+  .footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #181d26;
+    transition: width 0.25s ease;
+  }
+  .footer-links a:hover { color: #181d26; }
+  .footer-links a:hover::after { width: 100%; }
+
+  @media(max-width: 1024px) {
+    .feature-layout,
+    .editorial-grid {
+      grid-template-columns: 1fr;
+    }
+    .service-strip {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .feature-primary { min-height: auto; }
+    .ep-nav-links { display: none; }
+    .ep-mobile-btn { display: flex; }
+  }
+
+  @media(max-width: 768px) {
+    .ep-navbar { padding: 10px 16px; }
+    .assessment-hero { padding: 110px 20px 48px; }
+    .hero-inner h1 { font-size: 28px; letter-spacing: -1px; }
+    .editorial-intro { padding: 48px 20px; }
+    .feature-section { padding: 20px 20px 48px; }
+    .feature-layout { gap: 16px; }
+    .feature-primary { padding: 32px; }
+    .feature-list { grid-template-columns: 1fr; }
+    .side-card { padding: 32px; }
+    .service-strip { grid-template-columns: 1fr; }
+    .strip-card { padding: 28px 24px; }
+    .cta-band { padding: 72px 20px; }
+    .cta-inner h2 { font-size: 23px; letter-spacing: -1px; }
+    .footer { padding: 48px 20px; }
+    .footer-container { flex-direction: column; align-items: flex-start; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="ep-navbar" id="navbar">
+  <div class="ep-nav-inner">
+    <a href="index.html" class="ep-logo">
+      <img src="https://static.wixstatic.com/media/29117f_58e0681b66f44c4887d00b7691aeb160~mv2.png" alt="Eunoia Praxis">
+      <div>
+        <div class="ep-logo-title">Eunoia Praxis</div>
+      </div>
+    </a>
+      <div class="ep-nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="treatment.html">Treatment</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="contact.html" class="ep-nav-button">Book Consultation</a>
+      <button class="ep-mobile-btn" id="mobileBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="ep-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="assessments.html">Assessments</a>
+  <a href="treatment.html">Treatment</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<section class="assessment-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Eunoia Praxis Assessments</div>
+    <h1>Independent Clinical &<br>Functional Assessments</h1>
+    <p>Comprehensive multidisciplinary assessment services supporting rehabilitation, workplace functioning, insurance, legal, and long-term care planning.</p>
+  </div>
+</section>
+
+<section class="editorial-intro">
+  <div class="editorial-grid">
+    <div>
+      <h2 class="editorial-title">Assessment,<br>approached collaboratively.</h2>
+    </div>
+    <div class="editorial-copy">
+      <p>Eunoia Praxis provides structured, evidence-informed assessments that evaluate functional ability, clinical presentation, rehabilitation needs, and long-term outcomes.</p>
+      <p>Our multidisciplinary approach supports healthcare providers, insurers, legal professionals, employers, and individuals through clear, objective, and clinically grounded reporting.</p>
+    </div>
+  </div>
+</section>
+
+<section class="feature-section">
+  <div class="feature-layout">
+    <div class="feature-primary">
+      <div>
+        <div class="feature-tag">Featured Assessments</div>
+        <h2>Work &<br>Functional Capacity</h2>
+        <p>Functional and vocational assessments supporting return-to-work planning, employability evaluation, disability determination, and long-term occupational outcomes.</p>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item">
+          <h4>Return to Work</h4>
+          <p>Evaluates readiness to safely return to employment following illness or injury.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Vocational Assessments</h4>
+          <p>Evaluates employability, transferable skills, and occupational limitations.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Long-Term Disability</h4>
+          <p>Evaluates functional sustainability and long-term work capacity.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Functional Capacity</h4>
+          <p>Identifies abilities, restrictions, accommodations, and workplace considerations.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-side">
+      <div class="side-card light">
+        <h3>Catastrophic &<br>Future Care</h3>
+        <p>Evaluates severity, permanence, long-term support requirements, and projected future care needs within rehabilitation and legal contexts.</p>
+      </div>
+      <div class="side-card cream">
+        <h3>Insurance &<br>Medical-Legal</h3>
+        <p>Independent assessments supporting insurance eligibility, legal proceedings, claims management, and formal decision-making.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-strip">
+    <div class="strip-card">
+      <h4>Future Cost of Care</h4>
+      <p>Evaluates anticipated long-term care and rehabilitation needs based on prognosis and functional limitations.</p>
+    </div>
+    <div class="strip-card">
+      <h4>Catastrophic Assessments</h4>
+      <p>Evaluates the severity and permanence of injury and its impact on long-term functioning.</p>
+    </div>
+    <div class="strip-card">
+      <h4>Medical-Legal Assessment</h4>
+      <p>Provides independent expert opinions addressing functional and clinical impact within legal contexts.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-orb"></div>
+  <div class="cta-inner">
+    <span class="cta-eyebrow">Start Today</span>
+    <h2>Discuss an assessment referral.</h2>
+    <p>Connect with our team regarding assessment referrals, collaborative care, insurance inquiries, or medico-legal services.</p>
+    <a href="contact.html" class="cta-button">Contact Eunoia Praxis</a>
+  </div>
+</section>
+
+<footer class="epx-footer">
+  <div class="epx-footer-inner">
+    <div class="epx-footer-brand">
+      <h3>Eunoia Praxis</h3>
+      <p>Accessible mental health &amp; functional care across Ontario &amp; Alberta.</p>
+      <div class="epx-footer-copy">© 2025 Eunoia Praxis. All rights reserved.</div>
+    </div>
+    <nav class="epx-footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="treatment.html">Treatment</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy &amp; Confidentiality</a>
+    </nav>
+  </div>
+</footer>
+<style>
+.epx-footer{background:#fff;border-top:1px solid #e8ece4;padding:48px 24px;font-family:'Inter',-apple-system,sans-serif;}
+.epx-footer-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;}
+.epx-footer-brand h3{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400;color:#181d26;margin-bottom:8px;}
+.epx-footer-brand p{font-size:12px;line-height:1.7;color:#5f6b5a;max-width:340px;}
+.epx-footer-copy{font-size:11px;color:#8a9382;margin-top:10px;}
+.epx-footer-links{display:flex;flex-wrap:wrap;gap:22px;}
+.epx-footer-links a{color:#5f6b5a;text-decoration:none;font-size:12px;transition:color .25s ease;}
+.epx-footer-links a:hover{color:#181d26;}
+@media(max-width:768px){.epx-footer-inner{flex-direction:column;gap:20px;}.epx-footer{padding:36px 18px;}}
+</style>
+
+<script>
+  (function () {
+    var mobileBtn = document.getElementById('mobileBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', function () {
+        mobileBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

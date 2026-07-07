@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treatment — Eunoia Praxis</title>
+</head>
+<body>
+<!-- =========================================
+EUNOIA PRAXIS
+EDITORIAL TREATMENT PAGE
+PREMIUM VERSION
+========================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:#181d26;
+  --body:#333840;
+  --muted:#5f6b5a;
+  --line:#e7ebe3;
+  --surface:#f8faf6;
+  --forest:#243126;
+  --cream:#f3eee6;
+  --green:#7b9461;
+  --green-soft:#a8ba92;
+  --font-serif:'DM Serif Display', Georgia, serif;
+  --font-sans:'Inter', -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+}
+
+html, body {
+  font-family:var(--font-sans);
+  background:#ffffff;
+  color:var(--body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  scroll-behavior:smooth;
+}
+
+.container {
+  width:100%;
+  max-width:1280px;
+  margin:auto;
+  padding:0 38px;
+}
+
+section { padding:120px 20px; }
+
+/* ===== NAVBAR ===== */
+.ep-navbar {
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:9999;
+  padding:12px 24px;
+  backdrop-filter:blur(24px) saturate(140%);
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  background:rgba(255,255,255,0.92);
+  border-bottom:1px solid rgba(214,220,208,0.4);
+  transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ep-nav-inner {
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.ep-logo {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+}
+.ep-logo img { width:44px; height:44px; object-fit:contain; }
+.ep-logo-title {
+  font-family:var(--font-serif);
+  font-size:16px;
+  font-weight:400;
+  font-style:italic;
+  color:#181d26;
+}
+
+.ep-nav-links {
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+.ep-nav-links a {
+  position:relative;
+  text-decoration:none;
+  color:#3a3f36;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.2px;
+  transition:color 0.3s ease;
+  padding:4px 0;
+}
+.ep-nav-links a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+  width:0%;
+  height:1.5px;
+  background:var(--green);
+  border-radius:1px;
+  transition:width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ep-nav-links a:hover::after { width:100%; }
+
+.ep-nav-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:0 16px;
+  border-radius:10px;
+  text-decoration:none;
+  background:#181d26;
+  color:white;
+  font-size:11px;
+  font-weight:500;
+  transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border:none;
+}
+.ep-nav-button:hover { background:var(--green); color:#181d26; }
+
+.ep-mobile-btn {
+  display:none;
+  flex-direction:column;
+  gap:4px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  z-index:10000;
+}
+.ep-mobile-btn span {
+  width:22px;
+  height:2px;
+  background:#181d26;
+  display:block;
+  transition:all 0.3s ease;
+  border-radius:1px;
+}
+.ep-mobile-btn.active span:nth-child(1) { transform:rotate(45deg) translate(4px, 4px); }
+.ep-mobile-btn.active span:nth-child(2) { opacity:0; }
+.ep-mobile-btn.active span:nth-child(3) { transform:rotate(-45deg) translate(4px, -4px); }
+
+.ep-mobile-menu {
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(255,255,255,0.98);
+  backdrop-filter:blur(30px);
+  z-index:9990;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.4s ease;
+}
+.ep-mobile-menu.active { opacity:1; pointer-events:all; }
+.ep-mobile-menu a {
+  font-family:var(--font-serif);
+  font-size:20px;
+  color:#181d26;
+  text-decoration:none;
+}
+
+/* ===== HERO ===== */
+.treatment-hero {
+  padding:170px 20px 120px;
+  background:linear-gradient(180deg, #ffffff 0%, #f8faf6 100%);
+}
+
+.hero-inner {
+  max-width:980px;
+  margin:auto;
+  text-align:center;
+}
+
+.eyebrow {
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:24px;
+}
+
+.hero-inner h1 {
+  font-family:var(--font-serif);
+  font-size:clamp(30px, 4vw, 44px);
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  font-weight:400;
+  color:#181d26;
+  margin-bottom:32px;
+}
+
+.hero-inner p {
+  max-width:760px;
+  margin:auto;
+  font-size:14px;
+  line-height:1.75;
+  color:#5f6b5a;
+}
+
+/* ===== EDITORIAL INTRO ===== */
+.editorial-intro { background:#ffffff; }
+
+.editorial-grid {
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:90px;
+}
+
+.editorial-title {
+  font-family:var(--font-serif);
+  font-size:clamp(23px, 2.6vw, 31px);
+  line-height:1.1;
+  letter-spacing:-1px;
+  font-weight:400;
+  color:#181d26;
+}
+
+.editorial-copy p {
+  font-size:14px;
+  line-height:1.85;
+  color:#5f6b5a;
+  margin-bottom:24px;
+}
+
+/* ===== FEATURE SECTION ===== */
+.feature-layout {
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:30px;
+  margin-bottom:30px;
+}
+
+/* LARGE CARD */
+.feature-primary {
+  background:var(--forest);
+  border-radius:34px;
+  padding:56px;
+  color:white;
+}
+
+.feature-tag {
+  font-family:var(--font-mono);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--green-soft);
+  margin-bottom:24px;
+}
+
+.feature-primary h2 {
+  font-family:var(--font-serif);
+  font-size:clamp(22px, 2.4vw, 29px);
+  line-height:1.1;
+  letter-spacing:-1px;
+  font-weight:400;
+  margin-bottom:28px;
+}
+
+.feature-primary p {
+  font-size:14px;
+  line-height:1.75;
+  opacity:.85;
+  margin-bottom:40px;
+}
+
+.feature-list {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.feature-item {
+  padding:22px;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  background:rgba(255,255,255,0.03);
+}
+
+.feature-item h4 {
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.feature-item p {
+  font-size:12px;
+  line-height:1.7;
+  opacity:.8;
+  margin:0;
+}
+
+/* SIDE */
+.feature-side {
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+.side-card {
+  border-radius:30px;
+  padding:42px;
+}
+
+.side-card.light { background:#f8faf6; }
+.side-card.cream { background:#f3eee6; }
+
+.side-card h3 {
+  font-family:var(--font-serif);
+  font-size:clamp(18px, 1.7vw, 22px);
+  line-height:1.15;
+  letter-spacing:-0.8px;
+  font-weight:400;
+  color:#181d26;
+  margin-bottom:22px;
+}
+
+.side-card p {
+  font-size:14px;
+  line-height:1.75;
+  color:#5f6b5a;
+}
+
+/* ===== SERVICE STRIP ===== */
+.service-strip {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+
+.strip-card {
+  background:#ffffff;
+  border:1px solid #e7ebe3;
+  border-radius:24px;
+  padding:34px;
+  transition:.25s ease;
+}
+
+.strip-card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 18px 36px rgba(0,0,0,0.04);
+}
+
+.strip-card h4 {
+  font-family:var(--font-serif);
+  font-size:16px;
+  line-height:1.2;
+  letter-spacing:-0.5px;
+  font-weight:400;
+  color:#181d26;
+  margin-bottom:18px;
+}
+
+.strip-card p {
+  font-size:13px;
+  line-height:1.75;
+  color:#5f6b5a;
+}
+
+/* ===== CTA ===== */
+.cta-band {
+  background:#181d26;
+  padding:120px 20px;
+}
+
+.cta-inner {
+  max-width:980px;
+  margin:auto;
+  text-align:center;
+}
+
+.cta-inner h2 {
+  font-family:var(--font-serif);
+  font-size:clamp(23px, 2.8vw, 33px);
+  line-height:1.1;
+  letter-spacing:-1.5px;
+  font-weight:400;
+  color:white;
+  margin-bottom:28px;
+}
+
+.cta-inner p {
+  max-width:720px;
+  margin:auto;
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(255,255,255,0.75);
+  margin-bottom:36px;
+}
+
+.cta-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:48px;
+  padding:0 32px;
+  border-radius:14px;
+  text-decoration:none;
+  background:white;
+  color:#181d26;
+  font-size:13px;
+  font-weight:500;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background:#ffffff;
+  border-top:1px solid #eceee9;
+  padding:72px 20px;
+}
+
+.footer-container {
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.footer-brand h3 {
+  font-size:16px;
+  font-weight:600;
+  color:#181d26;
+  margin-bottom:12px;
+}
+
+.footer-brand p {
+  font-size:12px;
+  line-height:1.8;
+  color:#697366;
+  max-width:420px;
+}
+
+.footer-links {
+  display:flex;
+  gap:28px;
+  flex-wrap:wrap;
+}
+
+.footer-links a {
+  text-decoration:none;
+  color:#5f6874;
+  font-size:12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1100px){
+  .feature-layout, .editorial-grid { grid-template-columns:1fr; }
+  .service-strip { grid-template-columns:1fr; }
+}
+
+@media(max-width:768px){
+  .hero-inner h1 { font-size:28px; letter-spacing:-1px; }
+  .cta-inner h2 { font-size:23px; letter-spacing:-1px; }
+  .feature-list { grid-template-columns:1fr; }
+  .ep-nav-links { display:none; }
+  .ep-mobile-btn { display:flex; }
+  .feature-primary, .side-card { padding:34px; }
+  .footer-container { flex-direction:column; align-items:flex-start; }
+}
+</style>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="ep-navbar" id="navbar">
+  <div class="ep-nav-inner">
+    <a href="index.html" class="ep-logo">
+      <img src="https://static.wixstatic.com/media/29117f_58e0681b66f44c4887d00b7691aeb160~mv2.png" alt="Eunoia Praxis">
+      <div class="ep-logo-title">Eunoia Praxis</div>
+    </a>
+    <div class="ep-nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="treatment.html">Treatment</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="contact.html" class="ep-nav-button">Book Consultation</a>
+      <button class="ep-mobile-btn" id="mobileBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="ep-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="assessments.html">Assessments</a>
+  <a href="treatment.html">Treatment</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="treatment-hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Eunoia Praxis Treatment</span>
+    <h1>Evidence-Based<br>Treatment Services</h1>
+    <p>Integrated therapeutic and rehabilitation services supporting recovery, mobility, emotional well-being, and long-term functional health.</p>
+  </div>
+</section>
+
+<!-- ===== EDITORIAL INTRO ===== -->
+<section class="editorial-intro">
+  <div class="container editorial-grid">
+    <div>
+      <h2 class="editorial-title">Treatment focused on<br>recovery & function.</h2>
+    </div>
+    <div class="editorial-copy">
+      <p>Eunoia Praxis provides multidisciplinary treatment services supporting physical rehabilitation, emotional well-being, functional independence, and long-term recovery outcomes.</p>
+      <p>Our collaborative treatment model combines therapeutic, rehabilitation, and recovery-focused care tailored to individual clinical and functional needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURE SECTION ===== -->
+<section>
+  <div class="container">
+    <div class="feature-layout">
+      <!-- LARGE -->
+      <div class="feature-primary">
+        <div class="feature-tag">Featured Treatment</div>
+        <h2>Psychological &<br>Emotional Support</h2>
+        <p>Evidence-informed psychotherapy and counselling services supporting emotional recovery, coping strategies, resilience, and long-term mental well-being.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <h4>Psychotherapy</h4>
+            <p>Therapeutic support for emotional and psychological recovery.</p>
+          </div>
+          <div class="feature-item">
+            <h4>Counselling</h4>
+            <p>Collaborative emotional support and coping strategies.</p>
+          </div>
+          <div class="feature-item">
+            <h4>Emotional Regulation</h4>
+            <p>Supports emotional resilience and adaptive functioning.</p>
+          </div>
+          <div class="feature-item">
+            <h4>Recovery Support</h4>
+            <p>Structured treatment supporting long-term well-being.</p>
+          </div>
+        </div>
+      </div>
+      <!-- SIDE -->
+      <div class="feature-side">
+        <div class="side-card light">
+          <h3>Occupational<br>Therapy</h3>
+          <p>Supports individuals in regaining independence in daily activities, workplace participation, and functional living following illness or injury.</p>
+        </div>
+        <div class="side-card cream">
+          <h3>Physiotherapy &<br>Mobility</h3>
+          <p>Rehabilitation-focused treatment supporting movement, strength, pain reduction, and safe return to physical activity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE STRIP -->
+    <div class="service-strip">
+      <div class="strip-card">
+        <h4>Occupational Therapy</h4>
+        <p>Functional rehabilitation supporting work participation, independence, and activities of daily living.</p>
+      </div>
+      <div class="strip-card">
+        <h4>Psychotherapy / Counselling</h4>
+        <p>Therapeutic support focused on emotional recovery, coping strategies, and mental well-being.</p>
+      </div>
+      <div class="strip-card">
+        <h4>Physiotherapy</h4>
+        <p>Physical rehabilitation supporting mobility, strength, pain reduction, and functional recovery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2>Begin your<br>recovery journey.</h2>
+    <p>Connect with our team regarding treatment services, rehabilitation planning, referrals, or collaborative care opportunities.</p>
+    <a href="contact.html" class="cta-button">Contact Eunoia Praxis</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="epx-footer">
+  <div class="epx-footer-inner">
+    <div class="epx-footer-brand">
+      <h3>Eunoia Praxis</h3>
+      <p>Accessible mental health &amp; functional care across Ontario &amp; Alberta.</p>
+      <div class="epx-footer-copy">© 2025 Eunoia Praxis. All rights reserved.</div>
+    </div>
+    <nav class="epx-footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="treatment.html">Treatment</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy &amp; Confidentiality</a>
+    </nav>
+  </div>
+</footer>
+<style>
+.epx-footer{background:#fff;border-top:1px solid #e8ece4;padding:48px 24px;font-family:'Inter',-apple-system,sans-serif;}
+.epx-footer-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;}
+.epx-footer-brand h3{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400;color:#181d26;margin-bottom:8px;}
+.epx-footer-brand p{font-size:12px;line-height:1.7;color:#5f6b5a;max-width:340px;}
+.epx-footer-copy{font-size:11px;color:#8a9382;margin-top:10px;}
+.epx-footer-links{display:flex;flex-wrap:wrap;gap:22px;}
+.epx-footer-links a{color:#5f6b5a;text-decoration:none;font-size:12px;transition:color .25s ease;}
+.epx-footer-links a:hover{color:#181d26;}
+@media(max-width:768px){.epx-footer-inner{flex-direction:column;gap:20px;}.epx-footer{padding:36px 18px;}}
+</style>
+
+<script>
+const mobileBtn = document.getElementById('mobileBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileBtn.addEventListener('click', () => {
+  mobileBtn.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileBtn.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  document.body.style.overflow = '';
+}));
+</script>
+</body>
+</html>

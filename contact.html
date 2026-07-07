@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Eunoia Praxis</title>
+</head>
+<body>
+<!-- =========================================
+EUNOIA PRAXIS — CONTACT PAGE
+Matches editorial master (fonts, nav, logo, footer)
+========================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- =========================================
+GLOBAL STYLES
+========================================= -->
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root{
+  --ink:#181d26;
+  --text:#333840;
+  --muted:#5f6b5a;
+  --line:#e7ebe3;
+  --green:#7b9461;
+  --green-soft:#a8ba92;
+  --bg:#ffffff;
+  --bg-soft:#f8faf6;
+  --font-serif:'DM Serif Display', Georgia, serif;
+  --font-sans:'Inter', -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+}
+
+html, body{
+  font-family:var(--font-sans);
+  background:#ffffff;
+  color:var(--text);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  -webkit-font-smoothing:antialiased;
+}
+
+.container{
+  width:100%;
+  max-width:1280px;
+  margin:auto;
+  padding:0 40px;
+}
+
+section{ padding:110px 20px; }
+
+@media(max-width:768px){
+  .container{ padding:0 22px; }
+  section{ padding:88px 20px 80px; }
+}
+
+/* =========================================
+NAVBAR (canonical)
+========================================= */
+.ep-navbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:9999;
+  padding:12px 24px;
+  backdrop-filter:blur(24px) saturate(140%);
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  background:rgba(255,255,255,0.92);
+  border-bottom:1px solid rgba(214,220,208,0.4);
+  transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ep-nav-inner{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.ep-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+}
+.ep-logo img{ width:44px; height:44px; object-fit:contain; }
+.ep-logo-title{
+  font-family:var(--font-serif);
+  font-size:16px;
+  font-weight:400;
+  font-style:italic;
+  color:#181d26;
+}
+.ep-nav-links{
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+.ep-nav-links a{
+  position:relative;
+  text-decoration:none;
+  color:#3a3f36;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.2px;
+  transition:color 0.3s ease;
+  padding:4px 0;
+}
+.ep-nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-2px;
+  width:0%; height:1.5px;
+  background:var(--green);
+  border-radius:1px;
+  transition:width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ep-nav-links a:hover::after{ width:100%; }
+.ep-nav-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:0 16px;
+  border-radius:10px;
+  text-decoration:none;
+  background:#181d26;
+  color:white;
+  font-size:11px;
+  font-weight:500;
+  transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border:none;
+}
+.ep-nav-button:hover{ background:var(--green); color:#181d26; }
+.ep-mobile-btn{
+  display:none;
+  flex-direction:column;
+  gap:4px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  z-index:10000;
+}
+.ep-mobile-btn span{
+  width:22px; height:2px;
+  background:#181d26;
+  display:block;
+  transition:all 0.3s ease;
+  border-radius:1px;
+}
+.ep-mobile-btn.active span:nth-child(1){ transform:rotate(45deg) translate(4px, 4px); }
+.ep-mobile-btn.active span:nth-child(2){ opacity:0; }
+.ep-mobile-btn.active span:nth-child(3){ transform:rotate(-45deg) translate(4px, -4px); }
+.ep-mobile-menu{
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(255,255,255,0.98);
+  backdrop-filter:blur(30px);
+  z-index:9990;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.4s ease;
+}
+.ep-mobile-menu.active{ opacity:1; pointer-events:all; }
+.ep-mobile-menu a{
+  font-family:var(--font-serif);
+  font-size:20px;
+  color:#181d26;
+  text-decoration:none;
+}
+
+@media(max-width:1024px){
+  .ep-nav-links{ display:none; }
+  .ep-mobile-btn{ display:flex; }
+}
+@media(max-width:768px){
+  .ep-navbar{ padding:10px 16px; }
+}
+</style>
+
+<!-- =========================================
+NAVBAR
+========================================= -->
+<nav class="ep-navbar" id="navbar">
+  <div class="ep-nav-inner">
+    <a href="index.html" class="ep-logo">
+      <img src="https://static.wixstatic.com/media/29117f_58e0681b66f44c4887d00b7691aeb160~mv2.png" alt="Eunoia Praxis">
+      <div class="ep-logo-title">Eunoia Praxis</div>
+    </a>
+    <div class="ep-nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="treatment.html">Treatment</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="#contactForm" target="_self" class="ep-nav-button">Book Consultation</a>
+      <button class="ep-mobile-btn" id="mobileBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="ep-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="assessments.html">Assessments</a>
+  <a href="treatment.html">Treatment</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- =========================================
+CONTACT SECTION
+========================================= -->
+<section class="contact-hero">
+  <div class="container contact-grid">
+
+    <!-- LEFT -->
+    <div class="contact-copy">
+      <span class="eyebrow">Contact Eunoia Praxis</span>
+      <h1>Let’s start the conversation.</h1>
+      <p class="hero-description">Connect with our team regarding mental health assessments, treatment services, referrals, collaborative partnerships, or general inquiries.</p>
+
+      <div class="contact-details">
+        <div class="detail-item">
+          <div class="detail-icon">✉</div>
+          <div>
+            <span class="detail-label">Email</span>
+            <p>info@eunoiapraxis.com</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">⏱</div>
+          <div>
+            <span class="detail-label">Response Time</span>
+            <p>Typically within 1–2 business days</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-note">All inquiries are handled confidentially and reviewed by our administrative team.</div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form-wrap">
+      <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p hidden><label>Leave blank: <input name="bot-field"></label></p>
+        <div class="form-row">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First name">
+            <span class="error-message"></span>
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last name">
+            <span class="error-message"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="email" name="email" placeholder="Email address">
+            <span class="error-message"></span>
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="text" id="phone" name="phone" placeholder="Phone number">
+            <span class="error-message"></span>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>Inquiry Type</label>
+          <select id="inquiryType" name="inquiryType">
+            <option value="">Select inquiry type</option>
+            <option>Assessment Services</option>
+            <option>Treatment Services</option>
+            <option>Referral Inquiry</option>
+            <option>Collaboration Inquiry</option>
+            <option>General Question</option>
+          </select>
+          <span class="error-message"></span>
+        </div>
+
+        <div class="field full">
+          <label>Message</label>
+          <textarea id="message" name="message" placeholder="Tell us how we can help"></textarea>
+          <span class="error-message"></span>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Inquiry</button>
+
+        <div id="successMessage" class="success-message">Thank you. Your inquiry has been submitted successfully.</div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================
+CONTACT STYLES
+========================================= -->
+<style>
+.contact-hero{
+  background:linear-gradient(180deg, #ffffff 0%, #f8faf6 100%);
+}
+.contact-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:80px;
+  align-items:start;
+}
+.contact-copy{ max-width:460px; }
+
+.eyebrow{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:18px;
+}
+.contact-copy h1{
+  font-family:var(--font-serif);
+  font-size:clamp(30px, 4vw, 44px);
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  font-weight:400;
+  color:#181d26;
+  margin-bottom:24px;
+}
+.hero-description{
+  font-size:14px;
+  line-height:1.75;
+  color:#5f6b5a;
+  margin-bottom:34px;
+}
+.contact-details{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  margin-bottom:30px;
+}
+.detail-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+}
+.detail-icon{
+  width:42px; height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  background:#eef3e8;
+  flex-shrink:0;
+}
+.detail-label{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  color:#181d26;
+  margin-bottom:4px;
+}
+.detail-item p{
+  font-size:14px;
+  line-height:1.7;
+  color:#5f6b5a;
+}
+.contact-note{
+  font-size:13px;
+  line-height:1.8;
+  color:#7c8578;
+}
+
+.contact-form-wrap{
+  background:#ffffff;
+  border:1px solid #e7ebe3;
+  border-radius:20px;
+  padding:42px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.03);
+}
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+.form-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+.field{
+  display:flex;
+  flex-direction:column;
+}
+.field label{
+  font-size:12px;
+  font-weight:600;
+  color:#181d26;
+  margin-bottom:10px;
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  font-family:var(--font-sans);
+  border:1px solid #dbe1d4;
+  border-radius:12px;
+  padding:14px 16px;
+  font-size:14px;
+  color:#181d26;
+  outline:none;
+  transition:.2s ease;
+}
+.field textarea{
+  min-height:150px;
+  resize:vertical;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 4px rgba(123,148,97,0.10);
+}
+.error{ border-color:#d64b4b !important; }
+.error-message{
+  margin-top:8px;
+  font-size:12px;
+  color:#d64b4b;
+  min-height:14px;
+}
+.submit-btn{
+  margin-top:6px;
+  height:52px;
+  border:none;
+  border-radius:12px;
+  background:#181d26;
+  color:white;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s ease;
+}
+.submit-btn:hover{
+  transform:translateY(-2px);
+  background:var(--green);
+  color:#181d26;
+}
+.success-message{
+  display:none;
+  padding:16px;
+  border-radius:12px;
+  background:#eef6e8;
+  color:#48632f;
+  font-size:14px;
+}
+
+@media(max-width:980px){
+  .contact-grid{ grid-template-columns:1fr; gap:48px; }
+}
+@media(max-width:768px){
+  .contact-form-wrap{ padding:28px; }
+  .form-row{ grid-template-columns:1fr; }
+}
+</style>
+
+<!-- =========================================
+FOOTER (canonical)
+========================================= -->
+<footer class="epx-footer">
+  <div class="epx-footer-inner">
+    <div class="epx-footer-brand">
+      <h3>Eunoia Praxis</h3>
+      <p>Accessible mental health &amp; functional care across Ontario &amp; Alberta.</p>
+      <div class="epx-footer-copy">© 2025 Eunoia Praxis. All rights reserved.</div>
+    </div>
+    <nav class="epx-footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="treatment.html">Treatment</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy &amp; Confidentiality</a>
+    </nav>
+  </div>
+</footer>
+<style>
+.epx-footer{background:#fff;border-top:1px solid #e8ece4;padding:48px 24px;font-family:'Inter',-apple-system,sans-serif;}
+.epx-footer-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;}
+.epx-footer-brand h3{font-family:'DM Serif Display',Georgia,serif;font-size:18px;font-weight:400;color:#181d26;margin-bottom:8px;}
+.epx-footer-brand p{font-size:12px;line-height:1.7;color:#5f6b5a;max-width:340px;}
+.epx-footer-copy{font-size:11px;color:#8a9382;margin-top:10px;}
+.epx-footer-links{display:flex;flex-wrap:wrap;gap:22px;}
+.epx-footer-links a{color:#5f6b5a;text-decoration:none;font-size:12px;transition:color .25s ease;}
+.epx-footer-links a:hover{color:#181d26;}
+@media(max-width:768px){.epx-footer-inner{flex-direction:column;gap:20px;}.epx-footer{padding:36px 18px;}}
+</style>
+
+<style>
+.ep-footer{
+  background:#ffffff;
+  border-top:1px solid var(--line);
+  padding:48px 20px;
+}
+.ep-footer-inner{
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.ep-footer-brand h3{
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:0.3px;
+  color:#181d26;
+  margin-bottom:10px;
+}
+.ep-footer-brand p{
+  font-size:12px;
+  line-height:1.8;
+  color:#697366;
+  max-width:420px;
+}
+.ep-footer-links{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.ep-footer-links a{
+  text-decoration:none;
+  color:#5f6874;
+  font-size:12px;
+  transition:.2s ease;
+}
+.ep-footer-links a:hover{ color:#181d26; }
+
+@media(max-width:768px){
+  .ep-footer{ padding:40px 20px; }
+  .ep-footer-inner{ flex-direction:column; align-items:flex-start; gap:20px; }
+  .ep-footer-links{ flex-direction:column; align-items:flex-start; gap:14px; }
+}
+</style>
+
+<!-- =========================================
+SCRIPTS
+========================================= -->
+<script>
+// Mobile menu
+const mobileBtn = document.getElementById('mobileBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileBtn.addEventListener('click', () => {
+  mobileBtn.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileBtn.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  document.body.style.overflow = '';
+}));
+
+// Contact form: validate, then submit to Netlify Forms via AJAX (inline success, no page reload)
+const form = document.getElementById("contactForm");
+const submitBtn = form.querySelector(".submit-btn");
+
+form.addEventListener("submit", async function(e){
+  e.preventDefault();
+  let valid = true;
+  const fields = ["firstName","lastName","email","phone","inquiryType","message"];
+
+  fields.forEach(id => {
+    const input = document.getElementById(id);
+    const error = input.parentElement.querySelector(".error-message");
+    input.classList.remove("error");
+    error.innerText = "";
+    if(!input.value.trim()){
+      input.classList.add("error");
+      error.innerText = "This field is required";
+      valid = false;
+    }
+  });
+
+  const email = document.getElementById("email");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(email.value && !emailRegex.test(email.value)){
+    email.classList.add("error");
+    email.parentElement.querySelector(".error-message").innerText = "Enter a valid email";
+    valid = false;
+  }
+
+  if(!valid) return;
+
+  // Netlify expects URL-encoded form data including the form-name field
+  const data = new URLSearchParams(new FormData(form)).toString();
+
+  submitBtn.disabled = true;
+  const originalLabel = submitBtn.innerText;
+  submitBtn.innerText = "Sending…";
+
+  try {
+    const res = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data
+    });
+    if(!res.ok) throw new Error("Network error");
+
+    document.getElementById("successMessage").style.display = "block";
+    form.reset();
+  } catch(err) {
+    // Fallback: let the browser submit normally so the inquiry is never lost
+    form.submit();
+    return;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalLabel;
+  }
+});
+</script>
+</body>
+</html>
