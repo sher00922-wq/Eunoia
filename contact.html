@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Eunoia Praxis</title>
+<meta name="description" content="Contact Eunoia Praxis regarding mental health assessments, treatment services, referrals, or collaborative partnerships across Ontario &amp; Alberta.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <!-- =========================================
@@ -85,7 +87,7 @@ NAVBAR (canonical)
   gap:10px;
   text-decoration:none;
 }
-.ep-logo img{ width:44px; height:44px; object-fit:contain; }
+.ep-logo img{ width:40px; height:40px; object-fit:contain; }
 .ep-logo-title{
   font-family:var(--font-serif);
   font-size:16px;
@@ -256,33 +258,33 @@ CONTACT SECTION
         <p hidden><label>Leave blank: <input name="bot-field"></label></p>
         <div class="form-row">
           <div class="field">
-            <label>First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="First name">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First name" aria-required="true">
             <span class="error-message"></span>
           </div>
           <div class="field">
-            <label>Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Last name">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last name" aria-required="true">
             <span class="error-message"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="field">
-            <label>Email</label>
-            <input type="email" id="email" name="email" placeholder="Email address">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email address" aria-required="true">
             <span class="error-message"></span>
           </div>
           <div class="field">
-            <label>Phone</label>
-            <input type="text" id="phone" name="phone" placeholder="Phone number">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Phone number" aria-required="true">
             <span class="error-message"></span>
           </div>
         </div>
 
         <div class="field full">
-          <label>Inquiry Type</label>
-          <select id="inquiryType" name="inquiryType">
+          <label for="inquiryType">Inquiry Type</label>
+          <select id="inquiryType" name="inquiryType" aria-required="true">
             <option value="">Select inquiry type</option>
             <option>Assessment Services</option>
             <option>Treatment Services</option>
@@ -294,8 +296,8 @@ CONTACT SECTION
         </div>
 
         <div class="field full">
-          <label>Message</label>
-          <textarea id="message" name="message" placeholder="Tell us how we can help"></textarea>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us how we can help" aria-required="true"></textarea>
           <span class="error-message"></span>
         </div>
 
@@ -508,55 +510,6 @@ FOOTER (canonical)
 .epx-footer-links a{color:#5f6b5a;text-decoration:none;font-size:12px;transition:color .25s ease;}
 .epx-footer-links a:hover{color:#181d26;}
 @media(max-width:768px){.epx-footer-inner{flex-direction:column;gap:20px;}.epx-footer{padding:36px 18px;}}
-</style>
-
-<style>
-.ep-footer{
-  background:#ffffff;
-  border-top:1px solid var(--line);
-  padding:48px 20px;
-}
-.ep-footer-inner{
-  max-width:1180px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:40px;
-  flex-wrap:wrap;
-}
-.ep-footer-brand h3{
-  font-size:16px;
-  font-weight:600;
-  letter-spacing:0.3px;
-  color:#181d26;
-  margin-bottom:10px;
-}
-.ep-footer-brand p{
-  font-size:12px;
-  line-height:1.8;
-  color:#697366;
-  max-width:420px;
-}
-.ep-footer-links{
-  display:flex;
-  align-items:center;
-  gap:24px;
-  flex-wrap:wrap;
-}
-.ep-footer-links a{
-  text-decoration:none;
-  color:#5f6874;
-  font-size:12px;
-  transition:.2s ease;
-}
-.ep-footer-links a:hover{ color:#181d26; }
-
-@media(max-width:768px){
-  .ep-footer{ padding:40px 20px; }
-  .ep-footer-inner{ flex-direction:column; align-items:flex-start; gap:20px; }
-  .ep-footer-links{ flex-direction:column; align-items:flex-start; gap:14px; }
-}
 </style>
 
 <!-- =========================================
