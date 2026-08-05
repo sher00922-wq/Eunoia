@@ -72,6 +72,16 @@
   .btn-ghost { color: #181d26; font-size: 12px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 22px; border-radius: 12px; border: 1px solid #dfe4db; transition: all 0.3s var(--ease-out); background: white; cursor: pointer; }
   .btn-ghost:hover { border-color: var(--green-soft); background: var(--green-mist); }
 
+  .program-spotlight { margin-top: 18px; display: inline-flex; align-items: center; gap: 11px; min-height: 48px; padding: 7px 12px 7px 8px; border: 1px solid rgba(123,148,97,0.24); border-radius: 14px; background: linear-gradient(120deg, rgba(248,250,246,0.98), rgba(197,209,168,0.18)); color: var(--ink); text-decoration: none; box-shadow: 0 6px 20px rgba(24,29,38,0.04); transition: transform 0.3s var(--ease-out), border-color 0.3s ease, box-shadow 0.3s ease; }
+  .program-spotlight:hover { transform: translateY(-2px); border-color: rgba(123,148,97,0.48); box-shadow: 0 10px 26px rgba(24,29,38,0.08); }
+  .program-spotlight-icon { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 10px; background: var(--ink); color: var(--green-pale); }
+  .program-spotlight-icon svg { width: 18px; height: 18px; }
+  .program-spotlight-copy { display: grid; gap: 1px; text-align: left; }
+  .program-spotlight-label { font-family: var(--font-mono); font-size: 8px; font-weight: 600; line-height: 1.2; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green); }
+  .program-spotlight-title { font-family: var(--font-serif); font-size: 14px; line-height: 1.2; }
+  .program-spotlight-arrow { width: 14px; height: 14px; margin-left: 3px; color: var(--green); transition: transform 0.3s var(--ease-out); }
+  .program-spotlight:hover .program-spotlight-arrow { transform: translateX(3px); }
+
   .hero-visual-wrap { position: relative; display: flex; align-items: center; justify-content: center; height: 400px; }
   .hero-orb { position: absolute; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, rgba(201,190,132,0.18), rgba(124,138,92,0.06) 50%, transparent 70%); filter: blur(40px); z-index: 0; animation: orbPulse 8s ease-in-out infinite; }
   @keyframes orbPulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.08); opacity: 1; } }
@@ -180,6 +190,8 @@
     .hero-title { font-size: 28px; letter-spacing: -1px; }
     .hero-actions { flex-direction: column; align-items: stretch; }
     .btn-primary, .btn-ghost { width: 100%; }
+    .program-spotlight { width: 100%; justify-content: flex-start; }
+    .program-spotlight-arrow { margin-left: auto; }
     .section { padding: 32px 16px; }
     .section-header, .section-header-center { margin-bottom: 24px; }
     .how-grid, .why-grid { grid-template-columns: 1fr; }
@@ -240,6 +252,19 @@
         <a href="contact.html" class="btn-primary"><span>Submit a Referral</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <a href="#process" class="btn-ghost">Explore Our Process</a>
       </div>
+      <a href="contact.html?inquiry=sleep-health#contactForm" class="program-spotlight" aria-label="Ask about the Sleep Health Program">
+        <span class="program-spotlight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.3 8.3 0 1 0 20.2 15.1Z"/>
+            <path d="m16.8 4 .5 1.2 1.2.5-1.2.5-.5 1.2-.5-1.2-1.2-.5 1.2-.5.5-1.2Z"/>
+          </svg>
+        </span>
+        <span class="program-spotlight-copy">
+          <span class="program-spotlight-label">Program spotlight</span>
+          <span class="program-spotlight-title">Sleep Health Program</span>
+        </span>
+        <svg class="program-spotlight-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
     <div class="hero-visual-wrap" id="heroVisual">
       <div class="hero-orb"></div>
