@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Eunoia Praxis</title>
-<meta name="description" content="Contact Eunoia Praxis regarding mental health assessments, treatment services, referrals, or collaborative partnerships across Ontario &amp; Alberta.">
+<meta name="description" content="Contact Eunoia Praxis regarding mental health assessments, treatment services, referrals, Sleep Health Program inquiries, or collaborative partnerships across Ontario &amp; Alberta.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -16,9 +16,6 @@ Matches editorial master (fonts, nav, logo, footer)
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- =========================================
-GLOBAL STYLES
-========================================= -->
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -202,6 +199,7 @@ NAVBAR
       <a href="services.html">Services</a>
       <a href="assessments.html">Assessments</a>
       <a href="treatment.html">Treatment</a>
+      <a href="sleep-health.html">Sleep Health</a>
       <a href="contact.html">Contact</a>
     </div>
     <div style="display:flex;align-items:center;gap:12px;">
@@ -216,6 +214,7 @@ NAVBAR
   <a href="services.html">Services</a>
   <a href="assessments.html">Assessments</a>
   <a href="treatment.html">Treatment</a>
+  <a href="sleep-health.html">Sleep Health</a>
   <a href="contact.html">Contact</a>
 </div>
 
@@ -225,11 +224,10 @@ CONTACT SECTION
 <section class="contact-hero">
   <div class="container contact-grid">
 
-    <!-- LEFT -->
     <div class="contact-copy">
       <span class="eyebrow">Contact Eunoia Praxis</span>
       <h1>Let’s start the conversation.</h1>
-      <p class="hero-description">Connect with our team regarding mental health assessments, treatment services, referrals, collaborative partnerships, or general inquiries.</p>
+      <p class="hero-description">Connect with our team regarding mental health assessments, treatment services, Sleep Health Program inquiries, referrals, collaborative partnerships, or general inquiries.</p>
 
       <div class="contact-details">
         <div class="detail-item">
@@ -251,7 +249,6 @@ CONTACT SECTION
       <div class="contact-note">All inquiries are handled confidentially and reviewed by our administrative team.</div>
     </div>
 
-    <!-- FORM -->
     <div class="contact-form-wrap">
       <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="contact">
@@ -288,6 +285,7 @@ CONTACT SECTION
             <option value="">Select inquiry type</option>
             <option>Assessment Services</option>
             <option>Treatment Services</option>
+            <option>Sleep Health Program</option>
             <option>Referral Inquiry</option>
             <option>Collaboration Inquiry</option>
             <option>General Question</option>
@@ -310,9 +308,6 @@ CONTACT SECTION
   </div>
 </section>
 
-<!-- =========================================
-CONTACT STYLES
-========================================= -->
 <style>
 .contact-hero{
   background:linear-gradient(180deg, #ffffff 0%, #f8faf6 100%);
@@ -480,9 +475,6 @@ CONTACT STYLES
 }
 </style>
 
-<!-- =========================================
-FOOTER (canonical)
-========================================= -->
 <footer class="epx-footer">
   <div class="epx-footer-inner">
     <div class="epx-footer-brand">
@@ -495,6 +487,7 @@ FOOTER (canonical)
       <a href="services.html">Services</a>
       <a href="assessments.html">Assessments</a>
       <a href="treatment.html">Treatment</a>
+      <a href="sleep-health.html">Sleep Health</a>
       <a href="contact.html">Contact</a>
       <a href="privacy.html">Privacy &amp; Confidentiality</a>
     </nav>
@@ -512,9 +505,6 @@ FOOTER (canonical)
 @media(max-width:768px){.epx-footer-inner{flex-direction:column;gap:20px;}.epx-footer{padding:36px 18px;}}
 </style>
 
-<!-- =========================================
-SCRIPTS
-========================================= -->
 <script>
 // Mobile menu
 const mobileBtn = document.getElementById('mobileBtn');
@@ -529,6 +519,13 @@ mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => 
   mobileMenu.classList.remove('active');
   document.body.style.overflow = '';
 }));
+
+// Preselect inquiry type when a program link provides ?inquiry=sleep-health
+const inquiryType = document.getElementById('inquiryType');
+const inquiryParam = new URLSearchParams(window.location.search).get('inquiry');
+if (inquiryType && inquiryParam === 'sleep-health') {
+  inquiryType.value = 'Sleep Health Program';
+}
 
 // Contact form: validate, then submit to Netlify Forms via AJAX (inline success, no page reload)
 const form = document.getElementById("contactForm");
@@ -561,7 +558,6 @@ form.addEventListener("submit", async function(e){
 
   if(!valid) return;
 
-  // Netlify expects URL-encoded form data including the form-name field
   const data = new URLSearchParams(new FormData(form)).toString();
 
   submitBtn.disabled = true;
@@ -579,7 +575,6 @@ form.addEventListener("submit", async function(e){
     document.getElementById("successMessage").style.display = "block";
     form.reset();
   } catch(err) {
-    // Fallback: let the browser submit normally so the inquiry is never lost
     form.submit();
     return;
   } finally {
