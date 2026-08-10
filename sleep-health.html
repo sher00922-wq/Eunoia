@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Eunoia Praxis Sleep Health Program — practical sleep and fatigue support for individuals, shift workers, employers, insurers and rehabilitation partners.">
+<title>Sleep Health Program — Eunoia Praxis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#181d26;--text:#181d26;--muted:#5f6b5a;--line:#e8ece4;
+  --green:#7b9461;--green-soft:#a8ba92;--green-pale:#c5d1a8;--green-mist:rgba(95,127,58,.07);
+  --bg:#fff;--soft:#f8faf6;--serif:'DM Serif Display',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.16,1,.3,1)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--green-pale);color:var(--ink)}
+
+/* Navigation */
+.ep-navbar{position:fixed;inset:0 0 auto;z-index:9999;padding:12px 24px;background:rgba(255,255,255,.92);border-bottom:1px solid rgba(214,220,208,.5);backdrop-filter:blur(24px) saturate(140%)}
+.ep-nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.ep-logo{display:flex;align-items:center;gap:10px;text-decoration:none}.ep-logo img{width:40px;height:40px;object-fit:contain}.ep-logo-title{font-family:var(--serif);font-style:italic;font-size:16px}
+.ep-nav-links{display:flex;align-items:center;gap:28px}.ep-nav-links a{text-decoration:none;font-size:11px;font-weight:500;color:#3a3f36;position:relative;padding:4px 0}.ep-nav-links a:after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1.5px;background:var(--green);transition:width .3s var(--ease)}.ep-nav-links a:hover:after,.ep-nav-links a.active:after{width:100%}
+.ep-nav-button{height:36px;padding:0 16px;border-radius:10px;background:var(--ink);color:#fff;text-decoration:none;display:inline-flex;align-items:center;font-size:11px;font-weight:500;transition:.3s}.ep-nav-button:hover{background:var(--green);color:var(--ink)}
+.ep-mobile-btn{display:none;flex-direction:column;gap:4px;background:none;border:0;padding:6px;cursor:pointer}.ep-mobile-btn span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}.ep-mobile-btn.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}.ep-mobile-btn.active span:nth-child(2){opacity:0}.ep-mobile-btn.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.ep-mobile-menu{position:fixed;inset:0;z-index:9990;background:rgba(255,255,255,.98);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:27px;opacity:0;pointer-events:none;transition:opacity .35s}.ep-mobile-menu.active{opacity:1;pointer-events:auto}.ep-mobile-menu a{font-family:var(--serif);font-size:22px;text-decoration:none}
+
+/* Shared */
+.wrap{max-width:1200px;margin:auto;padding-left:24px;padding-right:24px}.section{padding:88px 0}.section-soft{background:var(--soft)}
+.eyebrow{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:16px}.eyebrow:before{content:"";width:24px;height:1.5px;background:var(--green)}
+.section-title{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-1px}.section-title em{color:var(--green);font-style:italic}.section-copy{font-size:15px;line-height:1.75;color:var(--muted);max-width:700px;margin-top:18px}
+.btn{height:46px;border-radius:12px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-size:12px;font-weight:600;transition:all .3s var(--ease)}.btn-primary{background:var(--ink);color:#fff}.btn-primary:hover{transform:translateY(-2px);background:var(--green);color:var(--ink)}.btn-secondary{border:1px solid #dfe4db;background:#fff}.btn-secondary:hover{border-color:var(--green-soft);background:var(--green-mist)}
+
+/* Hero */
+.hero{min-height:700px;padding:150px 0 80px;position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#fbfcf9 100%)}
+.hero:before{content:"";position:absolute;width:600px;height:600px;border-radius:50%;right:-150px;top:60px;background:radial-gradient(circle,rgba(197,209,168,.28),rgba(123,148,97,.08) 45%,transparent 70%);filter:blur(15px)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.07fr .93fr;gap:70px;align-items:center}.launch-badge{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(123,148,97,.28);background:rgba(248,250,246,.9);border-radius:999px;padding:8px 12px;font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:var(--green);margin-bottom:20px}.launch-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(123,148,97,.10)}
+.hero h1{font-family:var(--serif);font-size:clamp(46px,6.4vw,78px);font-weight:400;line-height:.98;letter-spacing:-2.8px;max-width:720px}.hero h1 em{display:block;color:var(--green);font-style:italic}.hero-desc{font-size:16px;line-height:1.75;color:var(--muted);max-width:630px;margin:24px 0 30px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px}.hero-tag{font-size:11px;color:#596353;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px}
+.sleep-art{height:470px;position:relative;display:grid;place-items:center}.moon-shell{width:360px;height:360px;border-radius:50%;position:relative;background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(197,209,168,.24));border:1px solid rgba(123,148,97,.18);box-shadow:0 35px 80px rgba(24,29,38,.08)}.moon-shell:before{content:"";position:absolute;inset:48px;border-radius:50%;background:var(--ink);box-shadow:inset -32px -24px 50px rgba(123,148,97,.15),0 25px 55px rgba(24,29,38,.16)}.moon-shell:after{content:"";position:absolute;width:175px;height:175px;border-radius:50%;background:#f8faf6;top:72px;left:156px;box-shadow:-10px 0 30px rgba(255,255,255,.2)}.orbit{position:absolute;inset:17px;border:1px dashed rgba(123,148,97,.3);border-radius:50%;animation:spin 24s linear infinite}.orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%;background:var(--green)}.orbit:before{width:8px;height:8px;top:47px;left:30px}.orbit:after{width:5px;height:5px;right:18px;bottom:96px}.star{position:absolute;font-family:var(--serif);color:var(--green);font-size:26px}.star.s1{right:35px;top:65px}.star.s2{left:40px;bottom:70px;font-size:17px}.star.s3{right:70px;bottom:30px;font-size:12px}@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Matter */
+.matter-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}.impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.impact{border:1px solid var(--line);border-radius:15px;background:#fff;padding:18px 18px 17px;display:flex;align-items:flex-start;gap:12px}.impact-mark{width:30px;height:30px;border-radius:9px;background:var(--green-mist);display:grid;place-items:center;color:var(--green);font-weight:700;font-size:12px;flex:0 0 30px}.impact span:last-child{font-size:13px;line-height:1.45;color:#424b3d}
+
+/* Audience */
+.audience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:40px}.audience-card{border:1px solid var(--line);border-radius:20px;padding:30px;background:#fff}.card-kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:1.3px;color:var(--green);font-size:9px;font-weight:600;margin-bottom:12px}.audience-card h3,.service-card h3{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:12px}.audience-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}.clean-list{list-style:none;border-top:1px solid var(--line);padding-top:14px}.clean-list li{font-size:12px;line-height:1.5;color:#4d5748;padding:8px 0 8px 18px;position:relative}.clean-list li:before{content:"";position:absolute;left:0;top:15px;width:6px;height:6px;border-radius:50%;background:var(--green-soft)}
+
+/* Services */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}.service-card{border:1px solid var(--line);background:#fff;border-radius:18px;padding:26px;min-height:240px;transition:all .35s var(--ease)}.service-card:hover{transform:translateY(-5px);border-color:rgba(123,148,97,.35);box-shadow:0 16px 38px rgba(24,29,38,.06)}.service-icon{width:42px;height:42px;border-radius:12px;background:var(--ink);color:var(--green-pale);display:grid;place-items:center;font-family:var(--mono);font-size:11px;margin-bottom:24px}.service-card h3{font-size:20px}.service-card p{font-size:13px;line-height:1.7;color:var(--muted)}.scope-note{margin-top:18px;border-left:3px solid var(--green);background:var(--green-mist);border-radius:0 14px 14px 0;padding:18px 20px}.scope-note strong{font-family:var(--mono);font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:7px}.scope-note p{font-size:12px;line-height:1.65;color:#4f594a}
+
+/* Process */
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;position:relative}.process-card{position:relative;border-top:1px solid var(--line);padding:30px 15px 0 0}.step-no{font-family:var(--serif);font-style:italic;color:var(--green);font-size:44px;line-height:1;margin-bottom:15px}.process-card h3{font-family:var(--serif);font-weight:400;font-size:22px;margin-bottom:10px}.process-card p{font-size:13px;line-height:1.7;color:var(--muted)}
+
+/* Approach */
+.approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}.principles{display:grid;gap:12px}.principle{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:15px;background:#fff;padding:18px}.principle-num{font-family:var(--mono);font-size:9px;color:var(--green);font-weight:600;padding-top:2px}.principle p{font-size:13px;line-height:1.6;color:#4d5748}.boundary{margin-top:26px;border:1px solid rgba(24,29,38,.12);border-radius:16px;padding:20px;background:var(--ink);color:#fff}.boundary strong{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1.3px;color:var(--green-pale);display:block;margin-bottom:8px}.boundary p{font-size:12px;line-height:1.7;color:rgba(255,255,255,.78)}
+
+/* FAQ */
+.faq-list{max-width:900px;margin:40px auto 0}.faq{border-bottom:1px solid var(--line)}.faq summary{list-style:none;cursor:pointer;padding:22px 48px 22px 0;font-family:var(--serif);font-size:20px;position:relative}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";position:absolute;right:4px;top:19px;font-family:var(--sans);font-size:24px;color:var(--green);font-weight:300}.faq[open] summary:after{content:"−"}.faq p{font-size:13px;line-height:1.75;color:var(--muted);padding:0 60px 22px 0}
+
+/* CTA */
+.cta-wrap{padding:30px 24px 88px;background:var(--soft)}.cta{max-width:1200px;margin:auto;border-radius:26px;overflow:hidden;position:relative;background:var(--ink);padding:65px 60px;color:#fff}.cta:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-120px;top:-170px;background:radial-gradient(circle,rgba(197,209,168,.2),transparent 65%)}.cta-inner{position:relative;z-index:2;max-width:720px}.cta .eyebrow{color:var(--green-pale)}.cta .eyebrow:before{background:var(--green-pale)}.cta h2{font-family:var(--serif);font-size:clamp(34px,4vw,52px);font-weight:400;line-height:1.05}.cta p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.72);margin:18px 0 25px}.cta .btn-primary{background:#fff;color:var(--ink)}.cta .btn-primary:hover{background:var(--green-pale)}.privacy-note{font-size:10px!important;color:rgba(255,255,255,.55)!important;margin:16px 0 0!important}
+
+/* Footer */
+.footer{border-top:1px solid var(--line);padding:28px 24px}.footer-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-brand{font-family:var(--serif);font-style:italic;font-size:15px}.footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer-links a{font-size:10px;color:var(--muted);text-decoration:none}.footer-copy{font-size:9px;color:#8b9287}
+
+@media(max-width:900px){.ep-nav-links,.ep-nav-button{display:none}.ep-mobile-btn{display:flex}.hero-grid,.matter-grid,.approach-grid{grid-template-columns:1fr;gap:45px}.hero{padding-top:125px}.sleep-art{height:360px}.moon-shell{width:290px;height:290px}.moon-shell:before{inset:40px}.moon-shell:after{width:140px;height:140px;top:60px;left:128px}.services-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:1fr}.process-card{padding-bottom:8px}.section{padding:70px 0}}
+@media(max-width:620px){.wrap{padding-left:17px;padding-right:17px}.ep-navbar{padding:10px 16px}.hero{padding:110px 0 62px;min-height:auto}.hero h1{font-size:48px;letter-spacing:-2px}.hero-desc{font-size:14px}.sleep-art{height:310px}.moon-shell{width:245px;height:245px}.moon-shell:before{inset:34px}.moon-shell:after{width:120px;height:120px;top:48px;left:106px}.impact-grid,.audience-grid,.services-grid{grid-template-columns:1fr}.section{padding:58px 0}.section-title{font-size:34px}.audience-card,.service-card{padding:22px}.cta-wrap{padding:18px 16px 60px}.cta{padding:42px 25px;border-radius:20px}.faq summary{font-size:18px}.footer-inner{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<nav class="ep-navbar" id="navbar">
+  <div class="ep-nav-inner">
+    <a href="index.html" class="ep-logo"><img src="https://static.wixstatic.com/media/29117f_58e0681b66f44c4887d00b7691aeb160~mv2.png" alt="Eunoia Praxis"><div class="ep-logo-title">Eunoia Praxis</div></a>
+    <div class="ep-nav-links">
+      <a href="index.html">Home</a><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="sleep-health.html" class="active">Sleep Health</a><a href="contact.html">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px"><a href="contact.html?inquiry=sleep-health#contactForm" class="ep-nav-button">Request Information</a><button class="ep-mobile-btn" id="mobileBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</nav>
+<div class="ep-mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="sleep-health.html">Sleep Health</a><a href="contact.html">Contact</a></div>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="launch-badge"><span class="launch-dot"></span>Sleep Health Program · Launching Soon</div>
+      <h1>Better sleep.<br>Safer work.<em>Stronger recovery.</em></h1>
+      <p class="hero-desc">Practical sleep and fatigue support for individuals, shift workers, employers, insurers and rehabilitation partners navigating performance, safety, disability and Return-to-Work needs.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="contact.html?inquiry=sleep-health#contactForm">Request Program Information <span aria-hidden="true">→</span></a><a class="btn btn-secondary" href="#program">Explore the Program</a></div>
+      <div class="hero-tags"><span class="hero-tag">Individual support</span><span class="hero-tag">Workplace programs</span><span class="hero-tag">Return-to-Work support</span></div>
+    </div>
+    <div class="sleep-art" aria-hidden="true"><div class="moon-shell"><div class="orbit"></div><span class="star s1">✦</span><span class="star s2">✦</span><span class="star s3">✦</span></div></div>
+  </div>
+</section>
+
+<section class="section" id="program">
+  <div class="wrap matter-grid">
+    <div><div class="eyebrow">Why sleep health matters</div><h2 class="section-title">Sleep challenges affect more than <em>the night.</em></h2><p class="section-copy">Sleep disruption and fatigue can influence daytime functioning, workplace safety, attendance, recovery and confidence returning to work. The Eunoia Praxis Sleep Health Program is being developed to make practical sleep and fatigue support easier to understand and access.</p></div>
+    <div class="impact-grid">
+      <div class="impact"><span class="impact-mark">01</span><span>Daytime functioning and performance</span></div><div class="impact"><span class="impact-mark">02</span><span>Shift-work and changing schedules</span></div><div class="impact"><span class="impact-mark">03</span><span>Workplace fatigue and safety</span></div><div class="impact"><span class="impact-mark">04</span><span>Recovery and rehabilitation</span></div><div class="impact"><span class="impact-mark">05</span><span>Disability management</span></div><div class="impact"><span class="impact-mark">06</span><span>Sustainable Return-to-Work planning</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="wrap">
+    <div class="eyebrow">Who we support</div><h2 class="section-title">Support shaped around <em>different needs.</em></h2><p class="section-copy">Whether you are seeking support for yourself or coordinating workplace, disability or rehabilitation services, we begin by understanding the concern, setting and intended outcome.</p>
+    <div class="audience-grid">
+      <article class="audience-card"><div class="card-kicker">Individual support</div><h3>Individuals and shift workers</h3><p>For individuals experiencing sleep concerns, fatigue, changing schedules or difficulty developing sustainable sleep routines.</p><ul class="clean-list"><li>Difficulty maintaining consistent sleep routines</li><li>Shift-work and schedule-related sleep challenges</li><li>Fatigue affecting daily functioning</li><li>Insomnia-related concerns</li><li>Sleep needs during recovery or Return-to-Work</li></ul></article>
+      <article class="audience-card"><div class="card-kicker">Referral & workplace support</div><h3>Organizations and referral partners</h3><p>For organizations and professionals seeking sleep and fatigue support for employees, clients or workplace teams.</p><ul class="clean-list"><li>Employers and human resources teams</li><li>Insurers and disability case managers</li><li>Legal professionals</li><li>Rehabilitation providers</li><li>Healthcare and occupational health partners</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">Program services</div><h2 class="section-title">Practical support built around <em>real routines.</em></h2>
+    <div class="services-grid">
+      <article class="service-card"><div class="service-icon">01</div><h3>Sleep education and coaching</h3><p>Personalized education and practical strategies that support healthier and more sustainable sleep habits.</p></article>
+      <article class="service-card"><div class="service-icon">02</div><h3>Shift-work sleep optimization</h3><p>Support for night work, rotating schedules, changing shifts, recovery periods and routine planning.</p></article>
+      <article class="service-card"><div class="service-icon">03</div><h3>Fatigue management</h3><p>Strategies that consider alertness, workload, daily demands, recovery opportunities and workplace safety.</p></article>
+      <article class="service-card"><div class="service-icon">04</div><h3>CBT-I-informed sleep strategies</h3><p>Behavioural sleep strategies informed by principles of Cognitive Behavioural Therapy for Insomnia and delivered within the practitioner's professional scope and qualifications.</p></article>
+      <article class="service-card"><div class="service-icon">05</div><h3>Workplace sleep and fatigue education</h3><p>Practical education for employers, leaders and workplace teams on sleep, fatigue, safety, wellbeing and performance.</p></article>
+      <article class="service-card"><div class="service-icon">06</div><h3>Disability and Return-to-Work support</h3><p>Sleep-focused support within rehabilitation, disability management and sustainable Return-to-Work planning.</p></article>
+    </div>
+    <div class="scope-note"><strong>Scope note</strong><p>Final services will depend on program fit, practitioner qualifications and the needs identified during the initial inquiry.</p></div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="wrap"><div class="eyebrow">How it works</div><h2 class="section-title">A clear beginning, followed by <em>the right next step.</em></h2>
+    <div class="process-grid">
+      <article class="process-card"><div class="step-no">01</div><h3>Tell us what you need</h3><p>Submit a short inquiry as an individual, employer, insurer or referral partner. Please do not include personal health information in the initial form.</p></article>
+      <article class="process-card"><div class="step-no">02</div><h3>We review program fit</h3><p>We clarify the concern, intended outcome, delivery needs and whether the Sleep Health Program is appropriate.</p></article>
+      <article class="process-card"><div class="step-no">03</div><h3>Receive recommended next steps</h3><p>If the program is suitable, we explain the proposed support, process and next steps before services begin. When another type of assessment or care is more appropriate, a referral may be recommended.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap approach-grid">
+    <div><div class="eyebrow">Our approach</div><h2 class="section-title">Practical. Responsible. <em>Collaborative.</em></h2><p class="section-copy">The Sleep Health Program is being designed around four principles.</p><div class="boundary"><strong>Program boundary</strong><p>The program does not replace medical assessment, diagnosis or treatment for a suspected sleep disorder.</p></div></div>
+    <div class="principles"><div class="principle"><span class="principle-num">01</span><p>Evidence-informed sleep and fatigue education</p></div><div class="principle"><span class="principle-num">02</span><p>Practical strategies that consider real-life routines</p></div><div class="principle"><span class="principle-num">03</span><p>Clear professional scope and referral boundaries</p></div><div class="principle"><span class="principle-num">04</span><p>Privacy-conscious communication and service coordination</p></div></div>
+  </div>
+</section>
+
+<section class="section section-soft" id="faq">
+  <div class="wrap"><div style="text-align:center;max-width:700px;margin:auto"><div class="eyebrow" style="justify-content:center">Frequently asked questions</div><h2 class="section-title">What to know <em>before launch.</em></h2></div>
+    <div class="faq-list">
+      <details class="faq" open><summary>When will the Sleep Health Program launch?</summary><p>The program is currently in development. Eunoia Praxis is accepting inquiries from individuals and organizations interested in receiving updates or discussing potential needs.</p></details>
+      <details class="faq"><summary>Can individuals contact Eunoia Praxis directly?</summary><p>Yes. Individuals may inquire directly about program availability and potential fit.</p></details>
+      <details class="faq"><summary>Can employers, insurers and rehabilitation professionals make referrals?</summary><p>Yes. We welcome inquiries regarding individual referrals, workplace education and organizational programming.</p></details>
+      <details class="faq"><summary>Is this a medical sleep clinic?</summary><p>No. The program does not replace medical assessment, diagnosis or treatment. If a concern may require medical evaluation, an appropriate referral may be recommended.</p></details>
+      <details class="faq"><summary>Will services be virtual or in person?</summary><p>Delivery options, service locations and geographic availability will be confirmed as the program is finalized.</p></details>
+      <details class="faq"><summary>Are services covered by insurance?</summary><p>Services may be eligible for reimbursement through an extended health benefits or insurance plan, depending on the terms of the individual policy and the qualifications of the professional delivering the service. Clients are responsible for contacting their insurance provider before beginning services to confirm eligibility, coverage limits and reimbursement requirements. Payment is made directly to Eunoia Praxis, and a receipt can be provided for submission to the insurance provider. Eunoia Praxis cannot guarantee coverage or reimbursement.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-wrap"><div class="cta"><div class="cta-inner"><div class="eyebrow">Launching soon · Now accepting inquiries</div><h2>Let's discuss the sleep or fatigue support you need.</h2><p>Contact Eunoia Praxis to request program information or discuss an individual, referral or workplace need.</p><a class="btn btn-primary" href="contact.html?inquiry=sleep-health#contactForm">Request Program Information <span aria-hidden="true">→</span></a><p class="privacy-note">Please do not include personal health information in your initial website inquiry.</p></div></div></section>
+</main>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-brand">Eunoia Praxis</div><div class="footer-links"><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div><div class="footer-copy">© 2026 Eunoia Praxis</div></div></footer>
+<script>
+const btn=document.getElementById('mobileBtn'),menu=document.getElementById('mobileMenu');
+btn?.addEventListener('click',()=>{const open=menu.classList.toggle('active');btn.classList.toggle('active',open);btn.setAttribute('aria-expanded',String(open));document.body.style.overflow=open?'hidden':''});
+menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('active');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
+</script>
+</body>
+</html>
