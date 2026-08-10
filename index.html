@@ -536,7 +536,17 @@ if (window.gsap) {
   const dpr = window.devicePixelRatio || 1;
   const hero = document.querySelector('.hero-section');
   const mouse = { x: -9999, y: -9999 };
-  const CONFIG = { count: 24, minRadius: 2, maxRadius: 5.5, speed: 0.2, connectionDistance: 140, mouseDistance: 180, colors: ["rgba(124,138,92,0.5)","rgba(201,190,132,0.4)","rgba(95,127,58,0.38)","rgba(168,186,146,0.32)"] };
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CONFIG = {
+    count: 16,
+    minRadius: 1.5,
+    maxRadius: 4,
+    speed: 0.09,
+    connectionDistance: 115,
+    mouseDistance: 150,
+    mouseForce: 0.16,
+    colors: ["rgba(124,138,92,0.38)","rgba(201,190,132,0.3)","rgba(95,127,58,0.28)","rgba(168,186,146,0.25)"]
+  };
   let dots = [], W = 0, H = 0;
 
   function resize() { W = hero.offsetWidth; H = hero.offsetHeight; canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + "px"; canvas.style.height = H + "px"; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
@@ -544,8 +554,10 @@ if (window.gsap) {
 
   function create() {
     dots = [];
+    const rightSideCount = Math.ceil(CONFIG.count * 0.7);
     for (let i = 0; i < CONFIG.count; i++) {
-      dots.push({ x: rand(W * 0.05, W * 0.95), y: rand(H * 0.05, H * 0.95), vx: rand(-CONFIG.speed, CONFIG.speed), vy: rand(-CONFIG.speed, CONFIG.speed), r: rand(CONFIG.minRadius, CONFIG.maxRadius), color: CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)] });
+      const minX = i < rightSideCount ? W * 0.48 : W * 0.08;
+      dots.push({ x: rand(minX, W * 0.96), y: rand(H * 0.08, H * 0.92), vx: rand(-CONFIG.speed, CONFIG.speed), vy: rand(-CONFIG.speed, CONFIG.speed), r: rand(CONFIG.minRadius, CONFIG.maxRadius), color: CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)] });
     }
   }
 
@@ -558,8 +570,8 @@ if (window.gsap) {
       if (dot.x < dot.r || dot.x > W - dot.r) dot.vx *= -1;
       if (dot.y < dot.r || dot.y > H - dot.r) dot.vy *= -1;
       const mdx = mouse.x - dot.x, mdy = mouse.y - dot.y, mDist = Math.sqrt(mdx*mdx + mdy*mdy);
-      if (mDist < CONFIG.mouseDistance) { const force = (CONFIG.mouseDistance - mDist) / CONFIG.mouseDistance * 0.5; dot.vx -= (mdx / mDist) * force; dot.vy -= (mdy / mDist) * force; }
-      dot.vx *= 0.999; dot.vy *= 0.999;
+      if (mDist > 0 && mDist < CONFIG.mouseDistance) { const force = (CONFIG.mouseDistance - mDist) / CONFIG.mouseDistance * CONFIG.mouseForce; dot.vx -= (mdx / mDist) * force; dot.vy -= (mdy / mDist) * force; }
+      dot.vx *= 0.994; dot.vy *= 0.994;
     }
   }
 
@@ -567,19 +579,19 @@ if (window.gsap) {
     ctx.clearRect(0, 0, W, H);
     for (let i = 0; i < dots.length; i++) {
       const p = dots[i];
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2); const glow = p.color.replace(/[\d\.]+\)$/, '0.05)'); ctx.fillStyle = glow; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 2.4, 0, Math.PI * 2); const glow = p.color.replace(/[\d\.]+\)$/, '0.03)'); ctx.fillStyle = glow; ctx.fill();
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.fill();
       for (let j = i + 1; j < dots.length; j++) {
         const p2 = dots[j]; const dx = p.x - p2.x, dy = p.y - p2.y, dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < CONFIG.connectionDistance) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.strokeStyle = `rgba(124,138,92,${0.08 * (1 - dist/CONFIG.connectionDistance)})`; ctx.lineWidth = 0.8; ctx.stroke(); }
+        if (dist < CONFIG.connectionDistance) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.strokeStyle = `rgba(124,138,92,${0.045 * (1 - dist/CONFIG.connectionDistance)})`; ctx.lineWidth = 0.65; ctx.stroke(); }
       }
       const mdx = mouse.x - p.x, mdy = mouse.y - p.y, mDist = Math.sqrt(mdx*mdx + mdy*mdy);
-      if (mDist < CONFIG.mouseDistance) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.strokeStyle = `rgba(123,148,97,${0.15 * (1 - mDist/CONFIG.mouseDistance)})`; ctx.lineWidth = 0.6; ctx.stroke(); }
+      if (mDist < CONFIG.mouseDistance) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.strokeStyle = `rgba(123,148,97,${0.08 * (1 - mDist/CONFIG.mouseDistance)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
     }
-    requestAnimationFrame(() => { update(); draw(); });
+    if (!reduceMotion) requestAnimationFrame(() => { update(); draw(); });
   }
   resize(); create(); draw();
-  let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { resize(); create(); }, 150); });
+  let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { resize(); create(); draw(); }, 150); });
 })();
 </script>
 
