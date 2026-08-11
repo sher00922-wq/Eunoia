@@ -50,9 +50,9 @@
   .ep-mobile-menu a { font-family: var(--font-serif); font-size: 22px; color: var(--ink); text-decoration: none; }
 
   /* ===== HERO ===== */
-  .hero-section { position: relative; padding: 100px 24px 48px; max-width: 1160px; margin: 0 auto; overflow: hidden; }
+  .hero-section { position: relative; padding: 100px 24px 24px; max-width: 1160px; margin: 0 auto; overflow: hidden; }
   #dots-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-  .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 12px; align-items: center; }
+  .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 0.98fr 1.02fr; gap: 0; align-items: center; }
   .hero-content { max-width: 520px; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
   .hero-eyebrow::before { content: ''; width: 24px; height: 1.5px; background: var(--green); border-radius: 1px; }
@@ -82,10 +82,10 @@
   .program-spotlight-arrow { width: 14px; height: 14px; margin-left: 3px; color: var(--green); transition: transform 0.3s var(--ease-out); }
   .program-spotlight:hover .program-spotlight-arrow { transform: translateX(3px); }
 
-  .hero-visual-wrap { position: relative; display: flex; align-items: center; justify-content: center; height: 400px; margin-left: -24px; }
+  .hero-visual-wrap { position: relative; display: flex; align-items: center; justify-content: center; height: 380px; margin-left: -70px; }
   .hero-orb { position: absolute; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, rgba(123,148,97,0.08), rgba(124,138,92,0.025) 50%, transparent 70%); filter: blur(40px); z-index: 0; animation: orbPulse 8s ease-in-out infinite; }
   @keyframes orbPulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.08); opacity: 1; } }
-  .hero-visual-wrap svg { position: relative; z-index: 1; width: 108%; height: 108%; opacity: 0.88; transform: translateX(-18px); }
+  .hero-visual-wrap svg { position: relative; z-index: 1; width: 112%; height: 112%; opacity: 0.88; transform: translateX(-42px); }
 
   /* ===== REVEAL ===== */
   .reveal { opacity: 0; transform: translateY(30px); }
@@ -270,7 +270,7 @@
     </div>
     <div class="hero-visual-wrap" id="heroVisual">
       <div class="hero-orb"></div>
-      <svg viewBox="0 0 900 900" preserveAspectRatio="xMidYMid slice" id="heroSvg" style="position:relative;z-index:1;width:100%;height:100%;">
+      <svg viewBox="80 20 860 860" preserveAspectRatio="xMidYMid slice" id="heroSvg" style="position:relative;z-index:1;width:100%;height:100%;">
         <defs>
           <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7C8A5C" stop-opacity="0.15"/><stop offset="100%" stop-color="#7C8A5C" stop-opacity="0"/></radialGradient>
         </defs>
