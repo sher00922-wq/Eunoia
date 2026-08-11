@@ -43,13 +43,12 @@ a{color:inherit}
 
 /* Hero */
 .hero{padding:100px 0 40px;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center}
 .hero .label{margin-bottom:16px}.hero h1{font-family:var(--serif);font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-1.5px;font-weight:400;color:var(--ink);max-width:600px;margin-bottom:16px}.hero h1 em{font-style:italic;color:var(--green)}
 .hero-desc{font-size:14px;line-height:1.65;color:var(--muted);max-width:470px;margin-bottom:28px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.hero-tag{font-size:10px;color:#596353;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px}
-.hero-art{height:420px;border-radius:var(--radius-lg);position:relative;overflow:hidden;background:linear-gradient(145deg,#fbfcf9,#f4f7ef);border:1px solid rgba(95,127,58,.12);box-shadow:var(--shadow)}
-.hero-art:before{content:"";position:absolute;width:310px;height:310px;border-radius:50%;right:40px;top:42px;background:radial-gradient(circle,rgba(123,148,97,.08),transparent 68%);filter:blur(10px)}
-.hero-art svg{width:100%;height:100%;position:relative;z-index:1}
-.art-line{fill:none;stroke:#7c8a5c;stroke-width:2;stroke-linecap:round;opacity:.72}.art-line-soft{fill:none;stroke:#a8ba92;stroke-width:1.25;stroke-linecap:round;opacity:.34}.art-line-faint{fill:none;stroke:#c5d1a8;stroke-width:1;opacity:.22}.art-dot{fill:#7c8a5c;opacity:.68}.art-dot-soft{fill:#a8ba92;opacity:.38}.art-orbit{fill:none;stroke:#7c8a5c;stroke-width:1.4;stroke-dasharray:3 8;opacity:.28}
+.hero-art{height:420px;position:relative;display:flex;align-items:center;justify-content:center;overflow:visible;background:transparent;border:0;border-radius:0;box-shadow:none}
+.hero-art:before{display:none}
+.hero-art img{display:block;width:118%;max-width:none;height:auto;max-height:455px;object-fit:contain;margin-left:-5%;mix-blend-mode:multiply}
 
 /* Why sleep matters */
 .matter-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;align-items:start}.impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.impact{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;padding:16px;display:flex;align-items:flex-start;gap:11px}.impact-mark{width:28px;height:28px;border-radius:9px;background:var(--green-mist);display:grid;place-items:center;color:var(--green);font-family:var(--mono);font-size:9px;font-weight:600;flex:0 0 28px}.impact span:last-child{font-size:12.5px;line-height:1.5;color:#424b3d}
@@ -71,8 +70,8 @@ a{color:inherit}
 /* Footer */
 .footer{background:#fff;border-top:1px solid var(--line);padding:48px 24px}.footer-inner{max-width:1280px;margin:auto;display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}.footer-brand{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink)}.footer-links{display:flex;gap:22px;flex-wrap:wrap}.footer-links a{font-size:12px;color:var(--muted);text-decoration:none}.footer-links a:hover{color:var(--ink)}.footer-copy{font-size:11px;color:#8a9382;margin-top:4px}
 
-@media(max-width:900px){.ep-nav-links,.ep-nav-button{display:none}.ep-mobile-btn{display:flex}.hero-grid,.matter-grid,.approach-grid{grid-template-columns:1fr;gap:32px}.hero-art{height:340px}.services-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:1fr}.section{padding:36px 0}}
-@media(max-width:620px){.shell{padding:0 17px}.ep-navbar{padding:10px 16px}.hero{padding:88px 0 30px}.hero h1{font-size:30px;letter-spacing:-1px}.hero-art{height:280px}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%}.impact-grid,.audience-grid,.services-grid{grid-template-columns:1fr}.section{padding:32px 0}.audience-card,.service-card{padding:20px}.cta-wrap{padding:14px 16px 36px}.cta{padding:34px 24px;border-radius:20px}.footer{padding:36px 18px}.footer-inner{flex-direction:column;gap:20px}}
+@media(max-width:900px){.ep-nav-links,.ep-nav-button{display:none}.ep-mobile-btn{display:flex}.hero-grid,.matter-grid,.approach-grid{grid-template-columns:1fr;gap:32px}.hero-art{height:340px}.hero-art img{width:108%;margin-left:0}.services-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:1fr}.section{padding:36px 0}}
+@media(max-width:620px){.shell{padding-left:17px;padding-right:17px}.ep-navbar{padding:10px 16px}.hero{padding:88px 0 32px}.hero h1{font-size:30px}.hero-desc{font-size:14px}.hero-art{height:280px}.hero-art img{width:112%;max-height:310px}.impact-grid,.audience-grid,.services-grid{grid-template-columns:1fr}.section{padding:32px 0}.section-title{font-size:26px}.audience-card,.service-card{padding:20px}.cta-wrap{padding:16px 16px 44px}.cta{padding:38px 24px;border-radius:20px}.faq summary{font-size:16px}.footer-inner{flex-direction:column;align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -80,10 +79,8 @@ a{color:inherit}
 <nav class="ep-navbar" id="navbar">
   <div class="ep-nav-inner">
     <a href="index.html" class="ep-logo"><img src="https://static.wixstatic.com/media/29117f_58e0681b66f44c4887d00b7691aeb160~mv2.png" alt="Eunoia Praxis"><div class="ep-logo-title">Eunoia Praxis</div></a>
-    <div class="ep-nav-links">
-      <a href="index.html">Home</a><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="sleep-health.html" class="active">Sleep Health</a><a href="contact.html">Contact</a>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px"><a href="contact.html?inquiry=sleep-health#contactForm" class="ep-nav-button">Request Information</a><button class="ep-mobile-btn" id="mobileBtn" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <div class="ep-nav-links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="sleep-health.html" class="active">Sleep Health</a><a href="contact.html">Contact</a></div>
+    <div style="display:flex;align-items:center;gap:12px"><a href="contact.html?inquiry=sleep-health#contactForm" class="ep-nav-button">Request Information</a><button class="ep-mobile-btn" id="mobileBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </nav>
 <div class="ep-mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="sleep-health.html">Sleep Health</a><a href="contact.html">Contact</a></div>
@@ -93,25 +90,13 @@ a{color:inherit}
   <div class="shell hero-grid">
     <div>
       <div class="label">Sleep Health Program · Launching Soon</div>
-      <h1>Better sleep. Safer work. <em>Stronger recovery.</em></h1>
+      <h1>Better sleep.<br>Safer work.<br><em>Stronger recovery.</em></h1>
       <p class="hero-desc">Practical sleep and fatigue support for individuals, shift workers, employers, insurers and rehabilitation partners navigating performance, safety, disability and Return-to-Work needs.</p>
-      <div class="hero-actions"><a class="btn btn-primary" href="contact.html?inquiry=sleep-health#contactForm">Request Program Information</a><a class="btn btn-secondary" href="#program">Explore the Program</a></div>
+      <div class="hero-actions"><a class="btn btn-primary" href="contact.html?inquiry=sleep-health#contactForm">Request Program Information →</a><a class="btn btn-secondary" href="#program">Explore the Program</a></div>
       <div class="hero-tags"><span class="hero-tag">Individual support</span><span class="hero-tag">Workplace programs</span><span class="hero-tag">Return-to-Work support</span></div>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 720 460" preserveAspectRatio="xMidYMid slice">
-        <path class="art-line" d="M36 397 C104 322 95 217 163 153 C229 91 327 104 374 169 C424 239 390 323 440 376 C486 425 574 421 683 352"/>
-        <path class="art-line" d="M83 436 C128 343 119 280 181 218 C245 154 337 147 401 195 C467 245 480 322 538 351 C583 374 632 366 709 322"/>
-        <path class="art-line-soft" d="M62 110 C151 152 235 137 316 91 C393 48 482 58 550 114 C611 164 632 219 699 245"/>
-        <path class="art-line-soft" d="M103 78 C174 115 242 108 302 73 C364 37 431 39 487 74"/>
-        <path class="art-line-faint" d="M253 12 C290 72 291 134 264 196 C234 264 245 335 302 443"/>
-        <path class="art-line-faint" d="M279 5 C316 75 320 145 295 213 C270 284 284 350 337 455"/>
-        <path class="art-orbit" d="M441 92 C509 41 610 55 653 121 C688 174 676 239 626 277 C573 318 501 306 465 262"/>
-        <path class="art-line-soft" d="M406 216 C489 208 558 228 620 274 C663 306 693 342 726 393"/>
-        <path class="art-line-faint" d="M388 235 C478 231 552 253 620 303 C663 335 697 374 728 419"/>
-        <circle class="art-dot" cx="165" cy="153" r="6"/><circle class="art-dot" cx="440" cy="376" r="5"/><circle class="art-dot" cx="653" cy="121" r="5"/>
-        <circle class="art-dot-soft" cx="316" cy="91" r="4"/><circle class="art-dot-soft" cx="626" cy="277" r="4"/><circle class="art-dot-soft" cx="302" cy="443" r="3"/>
-      </svg>
+      <img src="assets/sleep-health-hero.webp" alt="" width="1536" height="1024" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
@@ -155,7 +140,7 @@ a{color:inherit}
   <div class="principles"><div class="principle"><span class="principle-num">01</span><p>Evidence-informed sleep and fatigue education</p></div><div class="principle"><span class="principle-num">02</span><p>Practical strategies that consider real-life routines</p></div><div class="principle"><span class="principle-num">03</span><p>Clear professional scope and referral boundaries</p></div><div class="principle"><span class="principle-num">04</span><p>Privacy-conscious communication and service coordination</p></div></div>
 </div></section>
 
-<section class="section section-soft" id="faq"><div class="shell"><div style="text-align:center;max-width:680px;margin:auto"><div class="label">Frequently asked questions</div><h2 class="section-title">What to know <em>before launch.</em></h2></div>
+<section class="section section-soft" id="faq"><div class="shell"><div style="text-align:center;max-width:700px;margin:auto"><div class="label" style="justify-content:center">Frequently asked questions</div><h2 class="section-title">What to know <em>before launch.</em></h2></div>
   <div class="faq-list">
     <details class="faq" open><summary>When will the Sleep Health Program launch?</summary><p>The program is currently in development. Eunoia Praxis is accepting inquiries from individuals and organizations interested in receiving updates or discussing potential needs.</p></details>
     <details class="faq"><summary>Can individuals contact Eunoia Praxis directly?</summary><p>Yes. Individuals may inquire directly about program availability and potential fit.</p></details>
@@ -166,13 +151,13 @@ a{color:inherit}
   </div>
 </div></section>
 
-<section class="cta-wrap"><div class="cta"><div class="cta-inner"><div class="label">Launching soon · Now accepting inquiries</div><h2>Let's discuss the sleep or fatigue support you need.</h2><p>Contact Eunoia Praxis to request program information or discuss an individual, referral or workplace need.</p><a class="btn btn-primary" href="contact.html?inquiry=sleep-health#contactForm">Request Program Information</a><p class="privacy-note">Please do not include personal health information in your initial website inquiry.</p></div></div></section>
+<section class="cta-wrap"><div class="cta"><div class="cta-inner"><div class="label">Launching soon · Now accepting inquiries</div><h2>Let's discuss the sleep or fatigue support you need.</h2><p>Contact Eunoia Praxis to request program information or discuss an individual, referral or workplace need.</p><a class="btn btn-primary" href="contact.html?inquiry=sleep-health#contactForm">Request Program Information →</a><p class="privacy-note">Please do not include personal health information in your initial website inquiry.</p></div></div></section>
 </main>
 
-<footer class="footer"><div class="footer-inner"><div><div class="footer-brand">Eunoia Praxis</div><div class="footer-copy">© 2026 Eunoia Praxis. All rights reserved.</div></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="sleep-health.html">Sleep Health</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></nav></div></footer>
+<footer class="footer"><div class="footer-inner"><div><div class="footer-brand">Eunoia Praxis</div><div class="footer-copy">© 2026 Eunoia Praxis</div></div><div class="footer-links"><a href="services.html">Services</a><a href="assessments.html">Assessments</a><a href="treatment.html">Treatment</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div></div></footer>
 <script>
 const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>navbar?.classList.toggle('scrolled',window.scrollY>80),{passive:true});
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40),{passive:true});
 const btn=document.getElementById('mobileBtn'),menu=document.getElementById('mobileMenu');
 btn?.addEventListener('click',()=>{const open=menu.classList.toggle('active');btn.classList.toggle('active',open);btn.setAttribute('aria-expanded',String(open));document.body.style.overflow=open?'hidden':''});
 menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('active');btn.classList.remove('active');btn.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
